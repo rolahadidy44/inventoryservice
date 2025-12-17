@@ -17,7 +17,7 @@ public class InventoryController {
 
     private InventoryService inventoryService;
     @Autowired
-    public InventoryController(final InventoryService) {
+    public InventoryController(final InventoryService inventoryService) {
         this.inventoryService = inventoryService;
     }
 

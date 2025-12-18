@@ -1,7 +1,6 @@
 package com.example.inventoryservice.response;
 
 
-import com.example.inventoryservice.entity.Venue;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,11 +8,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class EventInventoryResponse {
-
-    private String event;
-    private Long capacity;
-    private Venue venue;
+@NoArgsConstructor
+public class VenueInventoryResponse {
+    private Long venueId;
+    private String venueName;
+    private Long totalCapacity;
 }

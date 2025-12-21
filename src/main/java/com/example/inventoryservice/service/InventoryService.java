@@ -6,9 +6,7 @@ import com.example.inventoryservice.repository.EventRepository;
 import com.example.inventoryservice.repository.VenueRepository;
 import com.example.inventoryservice.response.EventInventoryResponse;
 import com.example.inventoryservice.response.VenueInventoryResponse;
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,12 +16,12 @@ import java.util.stream.Collectors;
 public class InventoryService {
 
     private  final EventRepository eventRepository;
-    private final VenueRepository venueRepositrory;
+    private final VenueRepository venueRepository;
 
     @Autowired
-    public InventoryService(final EventRepository eventRepository, final VenueRepository venueRepositrory ){
+    public InventoryService(final EventRepository eventRepository, final VenueRepository venueRepository ){
         this.eventRepository = eventRepository;
-        this.venueRepositrory = venueRepositrory;
+        this.venueRepository = venueRepository;
 
     }
 
@@ -43,7 +41,8 @@ public class InventoryService {
 
     public VenueInventoryResponse getVenueInformation(final Long venueId) {
 
-        final Venue venue= venueRepositrory.findById(venueId).orElse(null);
+        final Venue venue = venueRepository.findById(venueId).orElse(null);
+//                .orElseThrow(() -> new RuntimeException("Venue not found"));
 
         return VenueInventoryResponse.builder()
                 .venueId(venue.getId())
@@ -52,4 +51,20 @@ public class InventoryService {
                 .build();
 
     }
+
+//public VenueInventoryResponse getVenueInformation(final Long venueId) {
+//    try {
+//        final Venue venue = venueRepository.findById(venueId)
+//                .orElseThrow(() -> new RuntimeException("Venue not found"));
+//
+//        return VenueInventoryResponse.builder()
+//                .venueId(venue.getId())
+//                .venueName(venue.getName())
+//                .totalCapacity(venue.getTotalCapacity())
+//                .build();
+//    } catch (Exception e) {
+//        e.printStackTrace();
+//        throw e; // rethrow to see full stack trace in console
+//    }
+//}
 }

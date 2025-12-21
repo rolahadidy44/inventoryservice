@@ -1,6 +1,7 @@
 package com.example.inventoryservice.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @Table(name="venue")
 public class Venue {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
@@ -24,8 +25,9 @@ public class Venue {
     private Long totalCapacity;
 
     @Column(name = "address")
-    private Long address;
+    private String address;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "venue")
     private List<Event> events;
 
